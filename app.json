@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/marker-list/marker-list",
+    "pages/marker-edit/marker-edit",
+    "pages/route-plan/route-plan",
+    "pages/ai-route/ai-route"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1677FF",
+    "navigationBarTitleText": "旅游路线规划",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F7FA"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#1677FF",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/icons/map.png",
+        "selectedIconPath": "assets/icons/map-active.png",
+        "text": "地图"
+      },
+      {
+        "pagePath": "pages/marker-list/marker-list",
+        "iconPath": "assets/icons/list.png",
+        "selectedIconPath": "assets/icons/list-active.png",
+        "text": "标点"
+      },
+      {
+        "pagePath": "pages/route-plan/route-plan",
+        "iconPath": "assets/icons/route.png",
+        "selectedIconPath": "assets/icons/route-active.png",
+        "text": "路线"
+      },
+      {
+        "pagePath": "pages/ai-route/ai-route",
+        "iconPath": "assets/icons/ai.png",
+        "selectedIconPath": "assets/icons/ai-active.png",
+        "text": "AI推荐"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

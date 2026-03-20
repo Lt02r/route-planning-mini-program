@@ -1,0 +1,176 @@
+<!-- pages/ai-route/ai-route.wxml -->
+<scroll-view class="page" scroll-y>
+  <!-- Header Banner -->
+  <view class="ai-banner">
+    <view class="ai-banner-icon">🤖</view>
+    <view class="ai-banner-text">
+      <view class="ai-banner-title">AI智能路线推荐</view>
+      <view class="ai-banner-desc">根据可用时间和偏好，自动生成最优游玩路线</view>
+    </view>
+  </view>
+
+  <!-- Settings Card -->
+  <view class="section-card">
+    <view class="section-title">行程设置</view>
+
+    <!-- Available Time -->
+    <view class="setting-group">
+      <view class="setting-label">
+        <text>⏰ 可用游玩时间</text>
+        <text class="setting-value">{{availableHours}} 小时</text>
+      </view>
+      <slider
+        class="time-slider"
+        min="1"
+        max="24"
+        step="0.5"
+        value="{{availableHours}}"
+        show-value="{{false}}"
+        activeColor="#722ED1"
+        bind:change="onHoursChange"
+      />
+      <view class="slider-range">
+        <text>1小时</text>
+        <text>24小时</text>
+      </view>
+    </view>
+
+    <!-- Avg time per spot -->
+    <view class="setting-group">
+      <view class="setting-label">
+        <text>🕐 每个景点平均时间</text>
+        <text class="setting-value">{{avgTimePerSpot}} 小时</text>
+      </view>
+      <slider
+        class="time-slider"
+        min="0.5"
+        max="4"
+        step="0.5"
+        value="{{avgTimePerSpot}}"
+        show-value="{{false}}"
+        activeColor="#722ED1"
+        bind:change="onAvgTimeChange"
+      />
+      <view class="slider-range">
+        <text>0.5小时</text>
+        <text>4小时</text>
+      </view>
+    </view>
+
+    <!-- Estimated spots -->
+    <view class="estimate-bar">
+      <text class="estimate-icon">📊</text>
+      <text class="estimate-text">
+        预计可游玩约 <text class="estimate-num">{{(availableHours / avgTimePerSpot).toFixed(0)}}</text> 个景点
+      </text>
+    </view>
+  </view>
+
+  <!-- Travel Mode -->
+  <view class="section-card">
+    <view class="section-title">出行方式</view>
+    <view class="travel-mode-group">
+      <view
+        class="travel-mode-item {{travelMode === 'driving' ? 'active' : ''}}"
+        data-mode="driving"
+        bind:tap="onTravelModeChange"
+      >
+        <text class="travel-icon">🚗</text>
+        <text>驾车</text>
+      </view>
+      <view
+        class="travel-mode-item {{travelMode === 'walking' ? 'active' : ''}}"
+        data-mode="walking"
+        bind:tap="onTravelModeChange"
+      >
+        <text class="travel-icon">🚶</text>
+        <text>步行</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Category Preference -->
+  <view class="section-card">
+    <view class="section-header-row">
+      <view class="section-title">优先选择分类</view>
+      <text class="hint-text">不选则包含全部</text>
+    </view>
+    <view class="category-pref-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="index"
+        class="category-pref-item {{preferCategories.indexOf(item) !== -1 ? 'active' : ''}}"
+        data-category="{{item}}"
+        bind:tap="onCategoryToggle"
+      >
+        <view class="tag tag-{{item}}">{{item}}</view>
+        <text wx:if="{{preferCategories.indexOf(item) !== -1}}" class="pref-check">✓</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Generate Button -->
+  <view class="generate-section">
+    <button
+      class="generate-btn {{generating ? 'generating' : ''}}"
+      bind:tap="onGenerate"
+      disabled="{{generating}}"
+    >
+      <text wx:if="{{!generating}}">🤖 生成AI推荐路线</text>
+      <text wx:else>正在智能规划中...</text>
+    </button>
+  </view>
+
+  <!-- AI Result -->
+  <view wx:if="{{showResult}}" class="section-card result-card">
+    <view class="result-header">
+      <view class="section-title">✨ 推荐路线</view>
+      <view class="result-summary">
+        共 {{aiRoute.length}} 个地点 · {{totalDistanceText}}
+      </view>
+    </view>
+
+    <!-- Route Map -->
+    <map
+      class="route-map"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      scale="{{scale}}"
+      markers="{{mapMarkers}}"
+      polyline="{{mapPolylines}}"
+      enable-zoom
+      enable-scroll
+    ></map>
+
+    <!-- Route Steps -->
+    <view class="route-timeline">
+      <view
+        wx:for="{{aiRoute}}"
+        wx:key="id"
+        class="timeline-item"
+      >
+        <view class="timeline-left">
+          <view class="timeline-dot">{{index + 1}}</view>
+          <view wx:if="{{index < aiRoute.length - 1}}" class="timeline-line"></view>
+        </view>
+        <view class="timeline-content">
+          <view class="timeline-name">{{item.name}}</view>
+          <view class="timeline-meta">
+            <view class="tag tag-{{item.category}}">{{item.category}}</view>
+            <view class="priority-badge priority-{{item.priority}}">{{priorityLabels[item.priority]}}</view>
+          </view>
+          <view wx:if="{{item.address}}" class="timeline-addr">📍 {{item.address}}</view>
+          <view wx:if="{{item.note}}" class="timeline-note">📝 {{item.note}}</view>
+          <view class="timeline-time">
+            预计游玩 {{avgTimePerSpot}} 小时
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Apply Button -->
+    <button class="btn-primary apply-btn" bind:tap="onApplyRoute">
+      去路线规划页查看
+    </button>
+  </view>
+</scroll-view>
