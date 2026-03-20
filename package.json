@@ -1,0 +1,18 @@
+{
+  "name": "route-planning-mini-program",
+  "version": "1.0.0",
+  "description": "旅游路线规划微信小程序",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ]
+  }
+}
