@@ -1,0 +1,96 @@
+<!-- pages/marker-list/marker-list.wxml -->
+<view class="page">
+  <!-- Search Bar -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索标点名称、地址、备注"
+        value="{{searchText}}"
+        bind:input="onSearchInput"
+      />
+      <text wx:if="{{searchText}}" class="search-clear" bind:tap="onSearchClear">✕</text>
+    </view>
+    <picker
+      class="sort-picker"
+      range="{{sortOptions}}"
+      range-key="label"
+      value="{{sortIndex}}"
+      bind:change="onSortChange"
+    >
+      <view class="sort-btn">
+        <text>{{sortOptions[sortIndex].label}}</text>
+        <text class="sort-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- Category Filter -->
+  <scroll-view class="category-bar" scroll-x>
+    <view class="category-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="index"
+        class="category-item {{activeCategory === item ? 'active' : ''}}"
+        data-category="{{item}}"
+        bind:tap="onCategoryChange"
+      >{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- Stats Bar -->
+  <view class="stats-bar">
+    <text>共 {{filteredMarkers.length}} 个标点</text>
+  </view>
+
+  <!-- Marker List -->
+  <view wx:if="{{filteredMarkers.length > 0}}" class="marker-list">
+    <view
+      wx:for="{{filteredMarkers}}"
+      wx:key="id"
+      class="marker-card"
+      data-id="{{item.id}}"
+      bind:tap="onMarkerTap"
+    >
+      <view class="marker-card-left">
+        <view class="priority-dot priority-dot-{{item.priority}}"></view>
+      </view>
+      <view class="marker-card-body">
+        <view class="marker-card-header">
+          <text class="marker-name">{{item.name}}</text>
+          <view class="marker-tags">
+            <view class="tag tag-{{item.category}}">{{item.category}}</view>
+            <view class="priority-badge priority-{{item.priority}}">
+              {{priorityLabels[item.priority]}}
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.address}}" class="marker-address">
+          <text>📍 {{item.address}}</text>
+        </view>
+        <view wx:if="{{item.note}}" class="marker-note">
+          <text>📝 {{item.note}}</text>
+        </view>
+        <view class="marker-coord">
+          <text>🌐 {{item.latitude}}, {{item.longitude}}</text>
+        </view>
+      </view>
+      <view class="marker-card-actions" catch:tap="onDeleteMarker" data-id="{{item.id}}">
+        <text class="delete-btn">🗑</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Empty State -->
+  <view wx:else class="empty-state">
+    <text style="font-size:80rpx">📍</text>
+    <text>暂无标点</text>
+    <text style="font-size:24rpx;color:#C0C4CC">点击右下角 ＋ 添加标点</text>
+  </view>
+
+  <!-- Add FAB -->
+  <view class="fab-add" bind:tap="onAddMarker">
+    <text class="fab-text">＋</text>
+  </view>
+</view>

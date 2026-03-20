@@ -1,0 +1,79 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- Category Filter Bar -->
+  <scroll-view class="category-bar" scroll-x>
+    <view class="category-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="index"
+        class="category-item {{activeCategory === item ? 'active' : ''}}"
+        data-category="{{item}}"
+        bind:tap="onCategoryChange"
+      >{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- Map -->
+  <map
+    class="map"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    scale="{{scale}}"
+    markers="{{mapMarkers}}"
+    show-location
+    enable-zoom
+    enable-scroll
+    enable-rotate="{{false}}"
+    bind:markertap="onMarkerTap"
+    bind:tap="onMapTap"
+    bind:longpress="onMapLongPress"
+  ></map>
+
+  <!-- Marker Count Hint -->
+  <view class="map-hint">
+    <text>显示 {{markers.length}} 个标点 · 长按地图添加</text>
+  </view>
+
+  <!-- Locate Button -->
+  <view class="fab-locate" bind:tap="onLocate">
+    <text class="fab-icon">📍</text>
+  </view>
+
+  <!-- Add Button -->
+  <view class="fab-add" bind:tap="onAddMarker">
+    <text class="fab-text">＋</text>
+  </view>
+
+  <!-- Marker Detail Popup -->
+  <view class="detail-mask" wx:if="{{showMarkerDetail}}" bind:tap="onCloseDetail"></view>
+  <view class="detail-panel {{showMarkerDetail ? 'show' : ''}}" wx:if="{{showMarkerDetail}}">
+    <view class="detail-header">
+      <view class="detail-title">{{selectedMarker.name}}</view>
+      <view class="detail-close" bind:tap="onCloseDetail">✕</view>
+    </view>
+    <view class="detail-body">
+      <view class="detail-row">
+        <view class="tag tag-{{selectedMarker.category}}">{{selectedMarker.category}}</view>
+        <view class="priority-badge priority-{{selectedMarker.priority}}">
+          {{priorityLabels[selectedMarker.priority]}}
+        </view>
+      </view>
+      <view class="detail-address" wx:if="{{selectedMarker.address}}">
+        <text class="detail-label">📍 </text>
+        <text>{{selectedMarker.address}}</text>
+      </view>
+      <view class="detail-note" wx:if="{{selectedMarker.note}}">
+        <text class="detail-label">📝 备注：</text>
+        <text>{{selectedMarker.note}}</text>
+      </view>
+      <view class="detail-coord">
+        <text class="detail-label">🌐 坐标：</text>
+        <text>{{selectedMarker.latitude}}, {{selectedMarker.longitude}}</text>
+      </view>
+    </view>
+    <view class="detail-actions">
+      <button class="btn-plain detail-btn" bind:tap="onEditMarker">编辑</button>
+      <button class="btn-danger detail-btn" bind:tap="onDeleteMarker">删除</button>
+    </view>
+  </view>
+</view>

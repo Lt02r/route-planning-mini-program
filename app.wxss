@@ -1,0 +1,106 @@
+/* app.wxss */
+page {
+  background-color: #F5F7FA;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Common button styles */
+.btn-primary {
+  background: #1677FF;
+  color: #fff;
+  border-radius: 12rpx;
+  border: none;
+  font-size: 30rpx;
+  padding: 20rpx 40rpx;
+}
+
+.btn-danger {
+  background: #F56C6C;
+  color: #fff;
+  border-radius: 12rpx;
+  border: none;
+  font-size: 30rpx;
+  padding: 20rpx 40rpx;
+}
+
+.btn-plain {
+  background: #fff;
+  color: #1677FF;
+  border-radius: 12rpx;
+  border: 2rpx solid #1677FF;
+  font-size: 30rpx;
+  padding: 20rpx 40rpx;
+}
+
+/* Card style */
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+/* Section title */
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #303133;
+  margin-bottom: 16rpx;
+}
+
+/* Tag styles */
+.tag {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  margin-right: 8rpx;
+}
+
+.tag-景点 { background: #E8F4FF; color: #1677FF; }
+.tag-餐饮 { background: #FFF3E8; color: #E6760A; }
+.tag-住宿 { background: #E8FFE8; color: #19BE6B; }
+.tag-购物 { background: #F5E8FF; color: #9B59B6; }
+.tag-交通 { background: #FFE8F0; color: #E74C3C; }
+.tag-其他 { background: #F5F5F5; color: #909399; }
+
+/* Priority badge */
+.priority-badge {
+  display: inline-block;
+  padding: 4rpx 14rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+.priority-0 { background: #F5F5F5; color: #909399; }
+.priority-1 { background: #FFF7E8; color: #E6A23C; }
+.priority-2 { background: #FFECEC; color: #F56C6C; }
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 40rpx;
+  color: #909399;
+}
+
+.empty-state text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+  color: #909399;
+  font-size: 26rpx;
+}

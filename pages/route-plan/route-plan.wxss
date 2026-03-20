@@ -1,0 +1,284 @@
+/* pages/route-plan/route-plan.wxss */
+.page {
+  background: #F5F7FA;
+  min-height: 100vh;
+  padding: 24rpx;
+  padding-bottom: 40rpx;
+}
+
+.section-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #303133;
+}
+
+.header-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.link {
+  font-size: 26rpx;
+  color: #1677FF;
+}
+
+.link-danger {
+  color: #F56C6C;
+}
+
+.section-desc {
+  font-size: 24rpx;
+  color: #909399;
+  margin-bottom: 20rpx;
+}
+
+/* Marker Select List */
+.marker-select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.marker-select-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 20rpx;
+  border: 2rpx solid #E4E7ED;
+  border-radius: 12rpx;
+  gap: 16rpx;
+  transition: all 0.2s;
+}
+
+.marker-select-item.selected {
+  border-color: #1677FF;
+  background: #F0F7FF;
+}
+
+.marker-select-check {
+  padding-top: 4rpx;
+  flex-shrink: 0;
+}
+
+.check-box {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #DCDFE6;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: all 0.2s;
+}
+
+.check-box.checked {
+  background: #1677FF;
+  border-color: #1677FF;
+}
+
+.check-mark {
+  color: #fff;
+  font-size: 24rpx;
+  line-height: 40rpx;
+}
+
+.marker-select-info {
+  flex: 1;
+}
+
+.marker-select-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #303133;
+  margin-bottom: 8rpx;
+}
+
+.marker-select-meta {
+  display: flex;
+  gap: 8rpx;
+  margin-bottom: 6rpx;
+}
+
+.marker-select-addr {
+  font-size: 22rpx;
+  color: #909399;
+}
+
+/* Travel Mode */
+.travel-mode-group {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 16rpx;
+}
+
+.travel-mode-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx;
+  border: 2rpx solid #E4E7ED;
+  border-radius: 12rpx;
+  gap: 8rpx;
+  font-size: 26rpx;
+  color: #606266;
+  transition: all 0.2s;
+}
+
+.travel-mode-item.active {
+  border-color: #1677FF;
+  color: #1677FF;
+  background: #F0F7FF;
+}
+
+.travel-icon {
+  font-size: 48rpx;
+}
+
+/* Action Row */
+.action-row {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 26rpx;
+  border-radius: 12rpx;
+}
+
+/* Route Result */
+.route-result {
+  padding-bottom: 32rpx;
+}
+
+.optimized-badge {
+  background: #E8FFFB;
+  color: #19BE6B;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+/* Stats */
+.route-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #F5F7FA;
+  border-radius: 12rpx;
+  padding: 20rpx 0;
+  margin: 20rpx 0;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1677FF;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #909399;
+  margin-top: 4rpx;
+}
+
+.stat-divider {
+  width: 2rpx;
+  height: 48rpx;
+  background: #E4E7ED;
+}
+
+/* Route Map */
+.route-map {
+  width: 100%;
+  height: 400rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+}
+
+/* Route Steps */
+.route-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.route-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+
+.route-step:last-child {
+  border-bottom: none;
+}
+
+.step-number {
+  width: 48rpx;
+  height: 48rpx;
+  background: #1677FF;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #303133;
+  margin-bottom: 8rpx;
+}
+
+.step-meta {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 6rpx;
+}
+
+.step-addr {
+  font-size: 22rpx;
+  color: #909399;
+}
+
+.step-note {
+  font-size: 22rpx;
+  color: #909399;
+}

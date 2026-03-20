@@ -1,0 +1,91 @@
+<!-- pages/marker-edit/marker-edit.wxml -->
+<scroll-view class="page" scroll-y>
+  <view class="form-card">
+    <!-- Name -->
+    <view class="form-group">
+      <view class="form-label required">标点名称</view>
+      <input
+        class="form-input"
+        placeholder="请输入标点名称"
+        value="{{form.name}}"
+        bind:input="onNameInput"
+        maxlength="30"
+      />
+    </view>
+
+    <!-- Location -->
+    <view class="form-group">
+      <view class="form-label required">位置</view>
+      <view class="location-box" bind:tap="onChooseLocation">
+        <view wx:if="{{hasLocation}}" class="location-selected">
+          <text class="location-icon">📍</text>
+          <view class="location-info">
+            <text wx:if="{{form.address}}">{{form.address}}</text>
+            <text wx:else>{{form.latitude}}, {{form.longitude}}</text>
+          </view>
+          <text class="location-change">修改</text>
+        </view>
+        <view wx:else class="location-empty">
+          <text class="location-icon">📍</text>
+          <text>点击选择位置</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Category -->
+    <view class="form-group">
+      <view class="form-label">分类</view>
+      <view class="category-select">
+        <view
+          wx:for="{{categories}}"
+          wx:key="index"
+          class="category-opt {{form.category === item ? 'active' : ''}}"
+          data-category="{{item}}"
+          bind:tap="onCategoryChange"
+          data-index="{{index}}"
+        >{{item}}</view>
+      </view>
+    </view>
+
+    <!-- Priority -->
+    <view class="form-group">
+      <view class="form-label">优先级</view>
+      <view class="priority-select">
+        <view
+          wx:for="{{priorityLabels}}"
+          wx:key="index"
+          class="priority-opt priority-opt-{{index}} {{form.priority === index ? 'active' : ''}}"
+          data-priority="{{index}}"
+          bind:tap="onPriorityTap"
+        >
+          <text class="priority-dot"></text>
+          {{item}}
+        </view>
+      </view>
+    </view>
+
+    <!-- Note -->
+    <view class="form-group">
+      <view class="form-label">自定义备注</view>
+      <textarea
+        class="form-textarea"
+        placeholder="添加备注信息（可选）"
+        value="{{form.note}}"
+        bind:input="onNoteInput"
+        maxlength="200"
+        auto-height
+      />
+      <view class="char-count">{{form.note.length}}/200</view>
+    </view>
+  </view>
+
+  <!-- Action Buttons -->
+  <view class="form-actions">
+    <button class="btn-plain action-btn" bind:tap="onCancel">取消</button>
+    <button
+      class="btn-primary action-btn {{submitting ? 'disabled' : ''}}"
+      bind:tap="onSubmit"
+      disabled="{{submitting}}"
+    >{{isEdit ? '保存' : '添加'}}</button>
+  </view>
+</scroll-view>
